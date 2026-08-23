@@ -57,9 +57,8 @@ A modern, full-featured **Personal Finance Management Dashboard** built with **R
    cd FinanceManagementDashboard
    ```
 
-2. **Navigate to the frontend directory & install dependencies**:
+2. **Install dependencies**:
    ```bash
-   cd frontend
    npm install
    ```
 
@@ -78,21 +77,23 @@ A modern, full-featured **Personal Finance Management Dashboard** built with **R
 ## 📁 Project Structure
 
 ```
-├── frontend/               # Frontend React Application
-│   ├── public/             # Static assets & favicon
-│   ├── src/
-│   │   ├── assets/         # Images & static media
-│   │   ├── components/     # UI components (charts, layout, modals, transactions)
-│   │   ├── context/        # ThemeContext, AuthContext, FinanceContext
-│   │   ├── data/           # Mock data and categories
-│   │   ├── pages/          # Dashboard, Income, Expense, Transactions, Budgets, Settings
-│   │   ├── utils/          # Formatting & Excel/CSV export helpers
-│   │   ├── App.jsx         # App router and layouts
-│   │   ├── index.css       # Tailwind & glassmorphic styling
-│   │   └── main.jsx        # Entry point
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
+├── public/                 # Static assets & favicon
+├── src/
+│   ├── assets/             # Images & static media
+│   ├── components/
+│   │   ├── common/         # StatCard, Modal, ThemeToggle, ConfirmDialog, ExportButton
+│   │   ├── dashboard/      # Analytical charts, Quick Actions, Recent Activity
+│   │   ├── layout/         # Navbar, Sidebar dock, MainLayout
+│   │   └── transactions/   # Filter bar, TransactionItem
+│   ├── context/            # ThemeContext, AuthContext, FinanceContext
+│   ├── data/               # Categories metadata, realistic mock datasets
+│   ├── pages/              # Dashboard, Income, Expense, Transactions, Budgets, Settings, Auth
+│   ├── utils/              # Currency/Date formatters, Excel export utilities
+│   ├── App.jsx             # Route definitions & Provider wrappers
+│   ├── index.css           # Design tokens, liquid glass cards, theme variables
+│   └── main.jsx            # Application entry point
+├── package.json
+└── vite.config.js
 ```
 
 ---
