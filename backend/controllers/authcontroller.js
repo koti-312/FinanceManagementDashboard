@@ -19,7 +19,7 @@ export const registerUser = async (req, res) => {
       message: "All fields are required",
     })
   }
-    const normalEmail = email.trim().toLowerCase();
+  const normalEmail = email.trim().toLowerCase();
 
 
   if (!validator.isEmail(normalEmail)) {
@@ -29,15 +29,36 @@ export const registerUser = async (req, res) => {
     })
   }
 
-  if (password.length < 8) {
+  if (password.length < 12) {
     return res.status(400).json({
       success: false,
-      message: "Password must be at least 8 characters",
+      message: "Password must start with an uppercase letter",
     })
   }
 
+  if (!/^[A-Z]/.test(password)) {
+    return res.status(400).json({
+      success: false,
+      message: "Password must start with an uppercase letter",
+    });
+  }
+
+  if (!/\d/.test(password)) {
+    return res.status(400).json({
+      success: false,
+      message: "Password must contain at least one number",
+    });
+  }
+
+  if (!/[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~]/.test(password)) {
+    return res.status(400).json({
+      success: false,
+      message: "Password must contain at least one special character",
+    });
+  }
+
   try {
-    if (await User.findOne({ email:normalEmail })) {
+    if (await User.findOne({ email: normalEmail })) {
       return res.status(409).json({
         success: false,
         message: "User already registered this emailID",
@@ -45,11 +66,11 @@ export const registerUser = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ 
-         name:name.trim(),
-         email:normalEmail,
-         password: hashPassword 
-        })
+    const user = await User.create({
+      name: name.trim(),
+      email: normalEmail,
+      password: hashPassword
+    })
 
     const token = createToken(user._id)
 
@@ -58,7 +79,7 @@ export const registerUser = async (req, res) => {
       token,
       user: { id: user._id, name: user.name, email: user.email }
     })
-  } 
+  }
   catch (error) {
     console.error(error);
     res.status(500).json({
@@ -82,14 +103,14 @@ export const loginUser = async (req, res) => {
 
 
   if (!validator.isEmail(normalEmail)) {
-  return res.status(400).json({
-    success: false,
-    message: "Invalid email",
-  })
-}
+    return res.status(400).json({
+      success: false,
+      message: "Invalid email",
+    })
+  }
 
   try {
-    const user = await User.findOne({ email : normalEmail })
+    const user = await User.findOne({ email: normalEmail })
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -112,7 +133,7 @@ export const loginUser = async (req, res) => {
       token,
       user: { id: user._id, name: user.name, email: user.email },
     })
-  } 
+  }
   catch (error) {
     console.error(error);
     res.status(500).json({

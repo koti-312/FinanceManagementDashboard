@@ -11,13 +11,21 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,
-        trim:true,
+        trim: true
     },
     password: {
         type: String,
         required: true
+    },
+    plaidAccessToken: {
+        type: String,
+        default: null
+    },
+    plaidItemId: {
+        type: String,
+        default: null
     }
-   },
+},
     {
         timestamps: true
     }
