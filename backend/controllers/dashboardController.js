@@ -3,14 +3,18 @@ import Transaction from "../models/Transaction.js"
 
 export const getDashboardSummary = async (req, res) => {
     try {
+        
         const userId = req.user._id
+        console.log("User ID:", userId)
         const accounts = await Account.find({
             user: userId
         })
-
+        console.log("Accounts found:", accounts.length)
+        
         const transactions = await Transaction.find({
             user: userId
         })
+         console.log("Transactions found:", transactions.length) 
 
         const totalBalance = accounts.reduce((total, account) => total + account.balance, 0)
 
@@ -22,6 +26,13 @@ export const getDashboardSummary = async (req, res) => {
 
         const totalInvestments = transactions.filter(transaction => transaction.type === "investment")
             .reduce((total, transaction) => total + transaction.amount, 0)
+
+        console.log("Dashboard Totals:", {
+            totalBalance,
+            totalIncome,
+            totalExpenses,
+            totalInvestments
+        });
 
         return res.status(200).json({
             success: true,

@@ -8,6 +8,7 @@ import plaidRoutes from "./routes/plaidRoutes.js"
 import accountRoutes from "./routes/accountRoutes.js"
 import transactionRoutes from "./routes/transactionRoutes.js"
 import dashboardRoutes from "./routes/dashboardRoutes.js"
+import budgetRoutes from "./routes/budgetRoutes.js"
 
 
 const port = 4000
@@ -24,12 +25,12 @@ app.use("/api/plaid",plaidRoutes)
 app.use("/api/accounts",accountRoutes)
 app.use("/api/transactions",transactionRoutes)
 app.use("/api/dashboard",dashboardRoutes)
+app.use("/api/budgets",budgetRoutes)
 
 
 app.get("/", (req, res) => {
     res.json("Express is running")
 })
-
 
 
 
