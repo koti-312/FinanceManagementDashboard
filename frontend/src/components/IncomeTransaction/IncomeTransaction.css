@@ -1,0 +1,59 @@
+.income-transactions-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.income-transactions-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: green;
+}
+
+.income-transactions-header p {
+  margin: 6px 0 20px;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.income-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.income-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.income-table th,
+.income-table td {
+  padding: 15px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+}
+
+.income-table th {
+  color: #6b7280;
+  font-weight: 600;
+  background: #f8fafc;
+}
+
+.income-table td {
+  color: #374151;
+}
+
+.income-amount {
+  color: #16a34a !important;
+  font-weight: 600;
+}
+
+.income-empty {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}

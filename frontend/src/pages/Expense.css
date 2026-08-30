@@ -1,0 +1,42 @@
+.expenses-layout {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.expenses-main {
+  margin-left: 240px;
+  min-height: 100vh;
+}
+
+.expenses-content {
+  padding: 32px;
+}
+
+.expenses-header {
+  margin-bottom: 28px;
+}
+
+.expenses-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.expenses-header p {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.expenses-message,
+.expenses-error {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+}
+
+.expenses-error {
+  color: #dc2626;
+}

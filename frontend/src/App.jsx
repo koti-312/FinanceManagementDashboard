@@ -1,63 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { FinanceProvider } from './context/FinanceContext';
-import MainLayout from './components/layout/MainLayout';
-import DashboardPage from './pages/DashboardPage';
-import IncomePage from './pages/IncomePage';
-import ExpensePage from './pages/ExpensePage';
-import TransactionsPage from './pages/TransactionsPage';
-import BudgetsPage from './pages/BudgetsPage';
-import SettingsPage from './pages/SettingsPage';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-};
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import LoginPage from "./pages/LoginPage.jsx"
+import Dashboard from "./pages/Dashboard.jsx"
+import Account from "./pages/Account.jsx"
+import Transaction from "./pages/Transaction.jsx"
+import Income from "./pages/Income.jsx"
+import Expense from "./pages/Expense.jsx"
+import RegisterPage from "./pages/RegisterPage.jsx"
+import Budget from "./pages/Budget.jsx"
 
 function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <FinanceProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* Public Auth Routes */}
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
+    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/accounts" element={<Account/>} />
+        <Route path="/transactions"element={<Transaction />}/>
+        <Route path="/income" element={<Income/>}/>
+        <Route path="/expenses" element={<Expense/>}/>
+        <Route path="/budgets" element={<Budget/>}/>
 
-              {/* Application Protected Dashboard Layout */}
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <MainLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<DashboardPage />} />
-                <Route path="income" element={<IncomePage />} />
-                <Route path="expense" element={<ExpensePage />} />
-                <Route path="transactions" element={<TransactionsPage />} />
-                <Route path="budgets" element={<BudgetsPage />} />
-                <Route path="settings" element={<SettingsPage />} />
-              </Route>
-
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </BrowserRouter>
-        </FinanceProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  );
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
-
+export default App

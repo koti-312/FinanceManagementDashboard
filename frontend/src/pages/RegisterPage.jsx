@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { loginUser } from "../services/api"
-import "./Login.css"
+import { registerUser } from "../services/api"
+import "./Register.css"
 
-const LoginPage = () => {
-
+const RegisterPage = () => {
     const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
+        name: "",
         email: "",
         password: "",
     })
@@ -16,7 +17,6 @@ const LoginPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-
         setFormData((previous) => ({
             ...previous,
             [name]: value,
@@ -29,20 +29,15 @@ const LoginPage = () => {
         setLoading(true)
 
         try {
-            const data = await loginUser(
+            const data = await registerUser(
+                formData.name,
                 formData.email,
                 formData.password
             )
-            console.log("Login response:", data)
-            const token = data.token || data.accessToken
 
-            if (token) {
-                localStorage.setItem("token", token)
-            }
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user))
-            }
-            navigate("/dashboard")
+            console.log("Register response:", data)
+
+            navigate("/login")
         }
         catch (error) {
             setError(error.message)
@@ -53,18 +48,30 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="login-page">
-            <div className="login-card">
-                <div className="login-header">
-                    <h1>Welcome Back</h1>
-                    <p>Login to your Personal Finance Dashboard</p>
+        <div className="register-page">
+            <div className="register-card">
+                <div className="register-header">
+                    <h1>Create Account</h1>
+                    <p>Start managing your personal finances</p>
                 </div>
 
-                <div className="login-body">
-                    {error && <div className="error-message">{error}</div>}
+                <div className="register-body">
+                    {error && <div className="register-error">{error}</div>}
 
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
+                        <div className="register-form-group">
+                            <label htmlFor="name">Name</label>
+
+                            <input id="name"
+                                name="name"
+                                type="text"
+                                placeholder="Enter your name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required />
+                        </div>
+
+                        <div className="register-form-group">
                             <label htmlFor="email">Email</label>
 
                             <input id="email"
@@ -76,26 +83,27 @@ const LoginPage = () => {
                                 required />
                         </div>
 
-                        <div className="form-group">
+                        <div className="register-form-group">
                             <label htmlFor="password">Password</label>
 
                             <input id="password"
                                 name="password"
                                 type="password"
-                                placeholder="Enter your password"
+                                placeholder="Create a password (min 12 characters)"
                                 value={formData.password}
                                 onChange={handleChange}
+                                minLength={12}
                                 required />
                         </div>
 
-                        <button type="submit" className="login-button" disabled={loading}>
-                            {loading ? "Logging in..." : "Login"}
+                        <button type="submit" className="register-button" disabled={loading}>
+                            {loading ? "Creating Account..." : "Register"}
                         </button>
                     </form>
 
-                    <p className="login-footer">
-                        Don't have an account?{" "}
-                        <Link to="/register">Create an account</Link>
+                    <p className="register-footer">
+                        Already have an account?{" "}
+                        <Link to="/login">Login</Link>
                     </p>
                 </div>
             </div>
@@ -103,4 +111,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default RegisterPage

@@ -1,0 +1,59 @@
+.expense-transactions-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.expense-transactions-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: red;
+}
+
+.expense-transactions-header p {
+  margin: 6px 0 20px;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.expense-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+
+.expense-table th,.expense-table td {
+  padding: 15px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+}
+
+.expense-table th {
+  color: #6b7280;
+  font-weight: 600;
+  background: #f8fafc;
+}
+
+.expense-table td {
+  color: #374151;
+}
+
+.expense-amount {
+  color: #dc2626 !important;
+  font-weight: 600;
+}
+
+.expense-empty {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+}
