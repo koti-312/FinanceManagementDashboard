@@ -1,0 +1,36 @@
+.expense-summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  margin-bottom: 24px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.expense-summary-card p {
+  margin: 0 0 8px;
+  color: rgb(211, 7, 7);
+  font-size: 22px;
+}
+
+.expense-summary-card h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+}
+
+.expense-summary-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 22px;
+  font-weight: 700;
+}

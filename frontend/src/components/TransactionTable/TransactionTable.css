@@ -1,0 +1,129 @@
+.transactions-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.transactions-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.transactions-table th {
+  padding: 15px 18px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transactions-table td {
+  padding: 16px 18px;
+  color: #475569;
+  font-size: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.transactions-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.transactions-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.transactions-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.transactions-table td strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.transaction-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.transaction-type.income {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.transaction-type.expense {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.transaction-type.investment {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.transaction-amount.income {
+  color: #16a34a;
+}
+
+.transaction-amount.expense {
+  color: #dc2626;
+}
+
+.transaction-amount.investment {
+  color: #7c3aed;
+}
+
+.transaction-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-btn {
+  color: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.delete-btn {
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
