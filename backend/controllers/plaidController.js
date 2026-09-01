@@ -1,6 +1,6 @@
 import { CountryCode, Products } from "plaid"
 import { plaidClient } from "../config/plaid.js"
-import User from "../models/user.js"
+import User from "../models/User.js"
 import Account from "../models/Account.js"
 import Transaction from "../models/Transaction.js"
 
