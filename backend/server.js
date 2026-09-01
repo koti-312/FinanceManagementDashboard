@@ -11,7 +11,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js"
 import budgetRoutes from "./routes/budgetRoutes.js"
 
 
-const port = 4000
+const port = process.env.PORT || 4000
 const app = express()
 
 // MongoDB connection
@@ -31,7 +31,6 @@ app.use("/api/budgets",budgetRoutes)
 app.get("/", (req, res) => {
     res.json("Express is running")
 })
-
 
 
 
