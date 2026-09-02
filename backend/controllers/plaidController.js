@@ -63,8 +63,7 @@ export const exchangePublictoken = async (req, res) => {
         user.plaidItemId = itemId
         await user.save()
 
-        const accountsResponse =
-            await plaidClient.accountsGet({
+        const accountsResponse =await plaidClient.accountsGet({
                 access_token: accessToken,
             })
 
