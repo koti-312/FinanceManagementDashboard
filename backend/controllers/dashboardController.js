@@ -24,8 +24,8 @@ export const getDashboardSummary = async (req, res) => {
         const totalExpenses = transactions.filter(transaction => transaction.type === "expense")
             .reduce((total, transaction) => total + transaction.amount, 0)
 
-        const totalInvestments = transactions.filter(transaction => transaction.type === "investment")
-            .reduce((total, transaction) => total + transaction.amount, 0)
+        const totalInvestments = accounts.filter(account => account.accountType === "investment")
+            .reduce((total, account) => total + account.balance, 0)
 
         console.log("Dashboard Totals:", {
             totalBalance,
