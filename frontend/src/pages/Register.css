@@ -38,33 +38,30 @@
   padding: 35px;
 }
 
-.register-form-group {
-  margin-bottom: 20px;
-}
-
-.register-form-group label {
+.register-form label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 16px;
   font-weight: 600;
   color: #111827;
 }
 
-.register-form-group input {
+.register-form input {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 16px;
+  margin-bottom: 20px;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
-.register-form-group input:focus {
+.register-form input:focus {
   border-color: #0d9488;
 }
 
-.register-form-group input::placeholder{
+.register-form input::placeholder{
   font-size: 14px;
 }
 
