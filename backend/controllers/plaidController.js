@@ -13,7 +13,7 @@ export const createLinkToken = async (req, res) => {
                 client_user_id: userId.toString(),
             },
             client_name: "Personal Finance Management Dashboard",
-            products: [Products.Transactions],
+            products: [Products.Transactions, Products.Investments],
             country_codes: [CountryCode.Us],
             language: "en",
         })
@@ -63,9 +63,12 @@ export const exchangePublictoken = async (req, res) => {
         user.plaidItemId = itemId
         await user.save()
 
-        const accountsResponse =await plaidClient.accountsGet({
-                access_token: accessToken,
-            })
+        const startDate = "2025-01-01"
+        const endDate = new Date().toISOString().split("T")[0]
+
+        const accountsResponse = await plaidClient.accountsGet({
+            access_token: accessToken,
+        })
 
         const plaidAccounts = accountsResponse.data.accounts
         const savedAccounts = []
@@ -105,8 +108,8 @@ export const exchangePublictoken = async (req, res) => {
 
         const transactionsResponse = await plaidClient.transactionsGet({
             access_token: accessToken,
-            start_date: "2025-01-01",
-            end_date: new Date().toISOString().split("T")[0],
+            start_date: startDate,
+            end_date: endDate,
         })
 
         const plaidTransactions = transactionsResponse.data.transactions
@@ -151,6 +154,51 @@ export const exchangePublictoken = async (req, res) => {
             })
             savedTransactions.push(transaction)
         }
+
+        const investmentAccounts = savedAccounts.filter((account) =>
+            account.accountType === "investment")
+        
+        const savedInvestmentTransactions = []
+
+        if (investmentAccounts.length > 0) {
+            const investmentResponse = await plaidClient.investmentsTransactionsGet({
+                access_token: accessToken,
+                start_date: startDate,
+                end_date: endDate,
+            })
+
+            const investmentTransactions = investmentResponse.data.investment_transactions || []
+            for (const investmentTransaction of investmentTransactions) {
+
+                const account = investmentAccounts.find((acc) =>
+                    acc.plaidAccountId === investmentTransaction.account_id
+                )
+                if (!account) {
+                    continue
+                }
+                const existingTransaction = await Transaction.findOne({
+                    user: userId,
+                    plaidTransactionId: investmentTransaction.investment_transaction_id,
+                })
+                if (existingTransaction) {
+                    continue
+                }
+
+                const transaction = await Transaction.create({
+                    user: userId,
+                    account: account._id,
+                    amount: Math.abs(investmentTransaction.amount || 0),
+                    type: "investment",
+                    category: "INVESTMENT",
+                    merchantName: investmentTransaction.name || investmentTransaction
+                        .security_name || "Investment",
+                    description: investmentTransaction.subtype || investmentTransaction.type || "",
+                    date: new Date(investmentTransaction.date),
+                    plaidTransactionId: investmentTransaction.investment_transaction_id,
+                })
+                savedInvestmentTransactions.push(transaction)
+            }
+        }
         res.status(200).json({
             success: true,
             message: "Plaid account connected successfully",
@@ -158,6 +206,7 @@ export const exchangePublictoken = async (req, res) => {
                 itemId,
                 accountsCount: savedAccounts.length,
                 transactionsCount: savedTransactions.length,
+                investmentTransactionsCount: savedInvestmentTransactions.length
             },
         })
 
