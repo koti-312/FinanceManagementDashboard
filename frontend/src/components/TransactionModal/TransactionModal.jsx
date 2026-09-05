@@ -18,7 +18,7 @@ const TransactionModal = ({editingTransaction,formData,formError,formLoading,acc
                 : "Enter your transaction details."}
             </p>
           </div>
-          <button className="close-modal-btn" onClick={onClose}> ×</button>
+          <button className="close-modal-btn" onClick={onClose}> x</button>
         </div>
 
         {formError && <div className="form-error">{formError}</div>}
