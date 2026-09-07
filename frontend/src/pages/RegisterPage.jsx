@@ -36,7 +36,6 @@ const RegisterPage = () => {
             )
 
             console.log("Register response:", data)
-
             navigate("/login")
         }
         catch (error) {
@@ -58,10 +57,9 @@ const RegisterPage = () => {
                 <div className="register-body">
                     {error && <div className="register-error">{error}</div>}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="register-form-group">
-                            <label htmlFor="name">Name</label>
+                    <form onSubmit={handleSubmit} className="register-form">
 
+                            <label htmlFor="name">Name</label>
                             <input id="name"
                                 name="name"
                                 type="text"
@@ -69,11 +67,8 @@ const RegisterPage = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required />
-                        </div>
 
-                        <div className="register-form-group">
                             <label htmlFor="email">Email</label>
-
                             <input id="email"
                                 name="email"
                                 type="email"
@@ -81,11 +76,8 @@ const RegisterPage = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required />
-                        </div>
 
-                        <div className="register-form-group">
                             <label htmlFor="password">Password</label>
-
                             <input id="password"
                                 name="password"
                                 type="password"
@@ -94,7 +86,6 @@ const RegisterPage = () => {
                                 onChange={handleChange}
                                 minLength={12}
                                 required />
-                        </div>
 
                         <button type="submit" className="register-button" disabled={loading}>
                             {loading ? "Creating Account..." : "Register"}

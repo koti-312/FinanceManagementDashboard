@@ -63,10 +63,9 @@ const LoginPage = () => {
                 <div className="login-body">
                     {error && <div className="error-message">{error}</div>}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                    <form onSubmit={handleSubmit} className="login-form">
 
+                            <label htmlFor="email">Email</label>
                             <input id="email"
                                 name="email"
                                 type="email"
@@ -74,11 +73,9 @@ const LoginPage = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required />
-                        </div>
+                
 
-                        <div className="form-group">
                             <label htmlFor="password">Password</label>
-
                             <input id="password"
                                 name="password"
                                 type="password"
@@ -86,7 +83,6 @@ const LoginPage = () => {
                                 value={formData.password}
                                 onChange={handleChange}
                                 required />
-                        </div>
 
                         <button type="submit" className="login-button" disabled={loading}>
                             {loading ? "Logging in..." : "Login"}
